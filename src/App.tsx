@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import Costs from './pages/Costs';
+import { RootState } from './redux/store';
+import { getAuthDataFromLS, removeUser } from './utils/auth';
+import { setAuth, setUsername } from './redux/auth/slice';
 
-function App() {
+const App: React.FC = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  
+  
+
+  React.useEffect(() => {
+    const auth = getAuthDataFromLS();
+
+    if (!auth || !auth.access_token) {
+      removeUser();
+    } else {
+      dispatch(setAuth(true));
+      dispatch(setUsername(auth.username));
+    }
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={isLoggedIn ? <Navigate to='/costs' /> : <Navigate to='login' />} />
+        <Route path='/registration' element={isLoggedIn ? <Navigate to='/costs' /> : <Registration />} />
+        <Route path='/login' element={isLoggedIn ? <Navigate to='/costs' /> : <Login />} />
+        <Route path='/costs' element={isLoggedIn ? <Costs /> : <Navigate to='/login' />} />
+        <Route path='*' element={<h1>Not Found</h1>} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
+
