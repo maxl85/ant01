@@ -1,1 +1,3 @@
-Сделать авторизацию как в статьях по поиску React Router 6 Login/Autorization
+Сделать авторизацию как в статьях (искать статьи по запросу - React Router 6 Login/Autorization)
+Переделать React Router 6 как в официальной документации
+Переделать authClient в createAsyncThunk ????
