@@ -1,40 +1,47 @@
 import React from 'react';
-import { AxiosError } from 'axios';
 import { LockOutlined, LockTwoTone, UserOutlined } from '@ant-design/icons';
-import { Typography, Button, Card, Col, Form, Input, Row, message } from 'antd';
+import { Typography, Button, Card, Col, Form, Input, Row, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AuthClient } from '../api/authClient';
 import { setAuth, setUsername } from '../redux/auth/slice';
+import { useLoginMutation } from '../redux/auth/authApi';
+import { isErrorWithMessage, isApiErrorResponse } from '../redux/helpers';
 
 
-
-interface AxiosMessageError {
-  error: string;
-  message: string;
-  statusCode: number;
+interface ILoginForm {
+  username: string;
+  password: string;
 }
 
 const { Title } = Typography;
 
+
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const [messageApi, contextHolder] = message.useMessage();
+  const [api, contextHolder] = notification.useNotification();
+  const [authLogin, { isLoading }] = useLoginMutation();
 
-  const onFinish = async (values: any) => {
-    const { username, password } = values;
-    try {
-      const result = await AuthClient.login(username, password);
-      dispatch(setAuth(true));
-      dispatch(setUsername(result.data.username));
-      // messageApi.success(`Вы вошли как ${result.data.username}`);
-      localStorage.setItem('auth', JSON.stringify(result.data));
-    } catch (error) {
-      const err = error as AxiosError<AxiosMessageError>;
-      messageApi.error(err.response?.data.message);
-    }
-
+  const PrettyPrintJson = (data: object) => {
+    return (<div><pre>{JSON.stringify(data, null, 2)}</pre></div>);
   };
+
+  const onFinish = async (values: ILoginForm) => {
+    try {
+      const result = await authLogin(values).unwrap();
+      dispatch(setAuth(true));
+      dispatch(setUsername(result.username));
+      localStorage.setItem('auth', JSON.stringify(result));
+    } catch (err) {
+      if (isApiErrorResponse(err)) {
+        api.error({ message: 'Ошибка', description: err.data.message });
+      } else if (isErrorWithMessage(err)) {
+        api.error({ message: 'Ошибка', description: err.message });
+      } else {
+        api.error({ message: 'Ошибка', description: PrettyPrintJson(err as object) });
+      }
+    }
+  };
+
 
   return (
     <>
@@ -70,6 +77,7 @@ const Login: React.FC = () => {
               <Form.Item>
                 <Button
                   type="primary"
+                  loading={isLoading}
                   htmlType="submit"
                   style={{ width: '100%' }}>
                   Войти

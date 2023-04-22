@@ -11,8 +11,6 @@ import { setAuth, setUsername } from './redux/auth/slice';
 const App: React.FC = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
-  
-  
 
   React.useEffect(() => {
     const auth = getAuthDataFromLS();
