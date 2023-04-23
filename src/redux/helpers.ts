@@ -21,7 +21,7 @@ export function isErrorWithMessage(error: unknown): error is { message: string }
 
 export interface IApiErrorResponse {
   status: number;
-  data: { error: string; message: string; statusCode: number };
+  data: { error?: string; message: string; statusCode: number };
 }
 
 export function isApiErrorResponse(error: unknown): error is IApiErrorResponse {

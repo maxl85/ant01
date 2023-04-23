@@ -1,19 +1,19 @@
-import React from 'react';
+import { FC, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import Costs from './pages/Costs';
 import { RootState } from './redux/store';
-import { getAuthDataFromLS, removeUser } from './utils/auth';
+import { removeUser } from './utils/auth';
 import { setAuth, setUsername } from './redux/auth/slice';
 
-const App: React.FC = () => {
+const App: FC = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    const auth = getAuthDataFromLS();
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
 
     if (!auth || !auth.access_token) {
       removeUser();

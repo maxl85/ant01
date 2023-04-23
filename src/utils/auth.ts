@@ -1,24 +1,10 @@
 import { setAuth, setUsername } from '../redux/auth/slice';
+import { store } from '../redux/store';
 // import { setCosts } from '../context/index';
 
 export const removeUser = () => {
     localStorage.removeItem('auth');
-    setAuth(false);
-    setUsername('');
+    store.dispatch(setAuth(false));
+    store.dispatch(setUsername(''));
     // setCosts([]);
-};
-
-export const getAuthDataFromLS = () => {
-    try {
-        const lSData = JSON.parse(localStorage.getItem('auth') as string);
-
-        if (!lSData) {
-            removeUser();
-            return;
-        }
-
-        return lSData;
-    } catch (error) {
-        removeUser();
-    }
 };

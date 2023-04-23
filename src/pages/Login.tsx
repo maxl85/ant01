@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { LockOutlined, LockTwoTone, UserOutlined } from '@ant-design/icons';
 import { Typography, Button, Card, Col, Form, Input, Row, notification } from 'antd';
 import { Link } from 'react-router-dom';
@@ -16,9 +16,9 @@ interface ILoginForm {
 const { Title } = Typography;
 
 
-const Login: React.FC = () => {
+const Login: FC = () => {
   const dispatch = useDispatch();
-  const [api, contextHolder] = notification.useNotification();
+  const [msg, contextHolder] = notification.useNotification();
   const [authLogin, { isLoading }] = useLoginMutation();
 
   const PrettyPrintJson = (data: object) => {
@@ -33,11 +33,11 @@ const Login: React.FC = () => {
       localStorage.setItem('auth', JSON.stringify(result));
     } catch (err) {
       if (isApiErrorResponse(err)) {
-        api.error({ message: 'Ошибка', description: err.data.message });
+        msg.error({ message: 'Ошибка', description: err.data.message });
       } else if (isErrorWithMessage(err)) {
-        api.error({ message: 'Ошибка', description: err.message });
+        msg.error({ message: 'Ошибка', description: err.message });
       } else {
-        api.error({ message: 'Ошибка', description: PrettyPrintJson(err as object) });
+        msg.error({ message: 'Ошибка', description: PrettyPrintJson(err as object) });
       }
     }
   };

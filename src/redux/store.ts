@@ -1,13 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authApi } from './auth/authApi';
 import auth from './auth/slice';
+// import costs from './cost/slice';
+import { authApi } from './auth/authApi';
+import { costhApi } from './cost/costApi';
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
-    auth
+    [costhApi.reducerPath]: costhApi.reducer,
+    auth,
+    // costs,
   },
-  middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(authApi.middleware),
+  middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat([authApi.middleware, costhApi.middleware]),
 });
 
 
