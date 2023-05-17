@@ -11,9 +11,9 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <Row justify={'center'} align={'middle'} style={{ minHeight: '100vh', backgroundColor: '#f0f2f5' }}>
+    <Row className='justify-center items-center min-h-screen bg-[#f0f2f5]'>
       <Col>
-        <Card style={{ boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)' }}>
+      <Card className='shadow'>
           <Form
             name="normal_login"
             style={{ minWidth: 300 }}
@@ -21,12 +21,12 @@ const Registration: React.FC = () => {
             onFinish={onFinish}
             autoComplete="on">
 
-            <LockTwoTone style={{ fontSize: '30px', display: 'block', marginBottom: 10 }} />
-            <Title level={4} style={{ marginBottom: 20, display: 'flex', justifyContent: 'center' }} >Регистрация пользователя</Title>
+            <LockTwoTone className='text-3xl block mb-2' />
+            <Title level={4} className='mb-5 flex justify-center' >Регистрация пользователя</Title>
             <Form.Item
               name="username"
               rules={[{ required: true, message: 'Введите ваш логин!' }]}>
-              <Input prefix={<UserOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />} placeholder="Логин" />
+              <Input prefix={<UserOutlined className='opacity-50' />} placeholder="Логин" />
             </Form.Item>
 
             <Form.Item
@@ -34,7 +34,7 @@ const Registration: React.FC = () => {
               rules={[{ required: true, message: 'Введите ваш пароль!' }]}
               hasFeedback>
               <Input.Password
-                prefix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                prefix={<LockOutlined className='opacity-50' />}
                 type="password"
                 placeholder="Пароль"
               />
@@ -56,7 +56,7 @@ const Registration: React.FC = () => {
               dependencies={['password']}
               hasFeedback>
               <Input.Password
-                prefix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                prefix={<LockOutlined className='opacity-50' />}
                 type="password"
                 placeholder="Повторите пароль"
               />
@@ -64,12 +64,12 @@ const Registration: React.FC = () => {
 
             <Form.Item>
               <Button
+                className='w-full'
                 type="primary"
-                htmlType="submit"
-                style={{ width: '100%' }}>
+                htmlType="submit">
                 Регистрация
               </Button>
-              <Link to="/login" style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }} >Войти</Link>
+              <Link to="/login" className='flex justify-center mt-2' >Войти</Link>
             </Form.Item>
           </Form>
         </Card>

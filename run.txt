@@ -1,0 +1,9 @@
+npx create-react-app . --template typescript
+npm i axios react-router-dom
+npm i @reduxjs/toolkit react-redux
+npm i antd @ant-design/icons
+npm install react-icons --save
+npm i -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm run start
