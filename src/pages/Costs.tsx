@@ -1,9 +1,14 @@
-import { FC, useEffect } from 'react';
-import { Button, notification } from 'antd';
+import { FC, useEffect, useState } from 'react';
+import { notification, Layout } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { useGetAllCostsQuery } from '../redux/cost/costApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
 import { removeUser } from '../utils/auth';
-import { useNavigate } from 'react-router-dom';
+import Footer from '../layout/Footer';
+import Header from '../layout/Header';
+import Sider from '../layout/Sider';
+
 
 const Costs: FC = () => {
   const navigate = useNavigate();
@@ -12,7 +17,7 @@ const Costs: FC = () => {
   const [msg, contextHolder] = notification.useNotification();
 
   if (!isLoading) {
-    console.log(data)
+    // console.log(data)
   }
 
   useEffect(() => {
@@ -27,16 +32,26 @@ const Costs: FC = () => {
   }, [error, msg, navigate]);
 
 
-  
-
   // if (isLoading) return <h1>Loading...</h1>;
   // if (!data) return <h1>No data :(</h1>;
   // if (!data) return <>{JSON.stringify(error, null, 2)}</>;
 
+  // TODO Add Spin to Content area
   return (
     <>
       {contextHolder}
-      <Button type='primary' loading={isLoading} >Costs</Button>
+      <Layout className='min-h-[100vh]'>
+        <Header />
+        <Layout>
+          <Sider />
+          <Layout className='px-6'>
+            <Layout.Content className='p-6 my-4 bg-white'>
+              Content
+            </Layout.Content>
+            <Footer />
+          </Layout>
+        </Layout>
+      </Layout>
     </>
   );
 };
