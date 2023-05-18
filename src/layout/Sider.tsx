@@ -9,7 +9,7 @@ const Sider: FC = () => {
   
   return (
     <Layout.Sider
-      className='hidden sm:block'
+      className='hidden sm:block shadow-md'
       theme='light'
       collapsible
       collapsed={collapsed}

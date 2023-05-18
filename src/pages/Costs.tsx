@@ -45,7 +45,7 @@ const Costs: FC = () => {
         <Layout>
           <Sider />
           <Layout className='px-6'>
-            <Layout.Content className='p-6 my-4 bg-white'>
+            <Layout.Content className='p-6 my-4 bg-white shadow-md'>
               Content
             </Layout.Content>
             <Footer />
