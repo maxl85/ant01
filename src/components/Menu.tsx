@@ -34,7 +34,7 @@ const _Menu = () => {
   return (
     <>
       <Menu
-        className='border-e-0'
+        className='border-e-0 overflow-auto scrollbar'
         theme="light"
         mode="inline"
         defaultSelectedKeys={['1']}

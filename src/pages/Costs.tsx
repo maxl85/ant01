@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { notification, Layout } from 'antd';
+import { notification, Layout, Row, Col, Image } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { useGetAllCostsQuery } from '../redux/cost/costApi';
@@ -8,6 +8,8 @@ import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Sider from '../layout/Sider';
+import Table from '../components/Table';
+
 
 
 const Costs: FC = () => {
@@ -36,17 +38,21 @@ const Costs: FC = () => {
   // if (!data) return <h1>No data :(</h1>;
   // if (!data) return <>{JSON.stringify(error, null, 2)}</>;
 
-  // TODO Add Spin to Content area
+  // TODO Add Spin for loading
   return (
     <>
       {contextHolder}
-      <Layout className='min-h-[100vh]'>
-        <Header />
+      <Layout className='min-h-screen'>
+        <Sider />
         <Layout>
-          <Sider />
+          <Header />
           <Layout className='px-6'>
             <Layout.Content className='p-6 my-4 bg-white shadow-md'>
-              Content
+              <Row>
+                <Col md={24} lg={{ span: 12, offset: 6 }}>
+                  <Table />
+                </Col>
+              </Row>
             </Layout.Content>
             <Footer />
           </Layout>
