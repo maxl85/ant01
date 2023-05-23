@@ -9,6 +9,7 @@ import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Sider from '../layout/Sider';
 import Table from '../components/Table';
+import WeekBox from '../components/WeekBox';
 
 
 
@@ -47,10 +48,26 @@ const Costs: FC = () => {
         <Layout>
           <Header />
           <Layout className='px-6'>
-            <Layout.Content className='p-6 my-4 bg-white shadow-md'>
+            {/* <Layout.Content className='p-6 my-4 bg-white shadow-md'>
               <Row>
                 <Col md={24} lg={{ span: 12, offset: 6 }}>
                   <Table />
+                </Col>
+              </Row>
+            </Layout.Content> */}
+            <Layout.Content className='p-6 my-4'>
+              <Row gutter={[16, 16]}>
+                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                  <WeekBox month='Январь' />
+                </Col>
+                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                  <WeekBox month='Февраль' />
+                </Col>
+                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                  <WeekBox month='Март' />
+                </Col>
+                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                  <WeekBox month='Апрель' />
                 </Col>
               </Row>
             </Layout.Content>
