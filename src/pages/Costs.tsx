@@ -28,7 +28,7 @@ const Costs: FC = () => {
     if (isApiErrorResponse(error)) {
       if (error.status === 401) {
         removeUser();
-        navigate('/login');
+        // navigate('/login');
       } else {
         msg.error({ message: `Ошибка ${error.status} (${error.data.error})`, description: error.data.message });
       }
