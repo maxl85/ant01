@@ -3,7 +3,7 @@ import { Box } from '@ant-design/plots';
 import { Line } from '@ant-design/charts';
 import { Column } from '@ant-design/charts';
 import { BoxConfig } from '@ant-design/plots/es/components/box';
-import { Calendar } from 'antd';
+
 import type { Dayjs } from 'dayjs';
 
 interface WeekBoxProps {
@@ -76,13 +76,7 @@ const WeekBox: FC<WeekBoxProps> = ({ month }) => {
         <Box  {...config} />
         {/* <div className='text-center text-sm text-slate-600'>№ недели</div> */}
 
-        <div className='mt-3'>
-          <Calendar fullscreen={false} cellRender={(date) => {
-            if (date.date() === 11 || date.date() === 15) {
-              return <div className='bg-red-400 -z-10 h-6 w-6 top-0 absolute'></div>
-            }
-          }} />
-        </div>
+        
       </div>
     </>
   );

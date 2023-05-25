@@ -10,6 +10,7 @@ import Header from '../layout/Header';
 import Sider from '../layout/Sider';
 import Table from '../components/Table';
 import WeekBox from '../components/WeekBox';
+import Calendar from '../components/Calendar';
 
 
 
@@ -70,6 +71,16 @@ const Costs: FC = () => {
                   <WeekBox month='Апрель' />
                 </Col>
               </Row>
+
+              <Row gutter={[16, 16]} className='mt-10'>
+                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                  <Calendar title='Май' />
+                </Col>
+                <Col xs={24} sm={24} md={24} lg={24} xl={18}>
+                  <Table />
+                </Col>
+              </Row>
+
             </Layout.Content>
             <Footer />
           </Layout>
