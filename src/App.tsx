@@ -24,13 +24,15 @@ const App: FC = () => {
   }, [dispatch]);
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path='/' element={isLoggedIn ? <Navigate to='/costs' /> : <Navigate to='login' />} />
         <Route path='/registration' element={isLoggedIn ? <Navigate to='/costs' /> : <Registration />} />
         <Route path='/login' element={isLoggedIn ? <Navigate to='/costs' /> : <Login />} />
         <Route path='/costs' element={isLoggedIn ? <Costs /> : <Navigate to='/login' />} />
         <Route path='*' element={<h1>Not Found</h1>} />
-      </Routes>
+      </Routes> */}
+      
+      <Costs />
     </>
   );
 };

@@ -8,4 +8,6 @@ npx tailwindcss init -p
 
 npm install @ant-design/charts --save --legacy-peer-deps
 
+npm i gh-pages --save-dev --legacy-peer-deps
+
 npm run start
