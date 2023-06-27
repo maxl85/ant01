@@ -1,0 +1,14 @@
+.yellow {
+  border: 1px solid rgba(239, 187, 90, 0.64);
+  background: linear-gradient(90deg, rgba(239, 187, 90, 0.50) 0%, rgba(239, 187, 90, 0.20) 100%);
+}
+
+.green {
+  border: 1px solid rgba(8, 130, 8, 0.64);
+  background: linear-gradient(90deg, rgba(8, 130, 8, 0.50) 0%, rgba(8, 130, 8, 0.20) 100%);
+}
+
+.red {
+  border: 1px solid rgba(244, 67, 54, 0.64);
+  background: linear-gradient(90deg, rgba(244, 67, 54, 0.50) 0%, rgba(244, 67, 54, 0.20) 100%);
+}

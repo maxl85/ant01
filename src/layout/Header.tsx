@@ -40,9 +40,9 @@ const _Header: FC = () => {
   return (
     <>
       <div className='h-12'></div>
-      <Layout.Header className='fixed left-0 w-full top-0 z-50 p-0 sm:px-12 flex justify-between items-center h-12'>
+      <Layout.Header className='fixed left-0 w-full top-0 z-50 p-0 md:px-12 flex justify-between items-center h-12'>
         <Button
-          className='block sm:hidden text-2xl text-white mx-5 mb-3'
+          className='block md:hidden text-2xl text-white mx-5 mb-3'
           type='text'
           icon={<MenuUnfoldOutlined />}
           onClick={() => setDrawerOpen(true)}

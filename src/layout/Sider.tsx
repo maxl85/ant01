@@ -9,12 +9,12 @@ const Sider: FC = () => {
 
   return (
     <>
-      <div className='hidden sm:block transition-all duration-200 delay-0' style={{ width: collapsed ? 80 : 200 }}>
+      <div className='hidden md:block transition-all duration-200 delay-0' style={{ width: collapsed ? 80 : 200 }}>
       {/* <div className={`hidden sm:block transition-all duration-200 delay-0 ${collapsed ? 'w-[80px]' : 'w-[200px]'}`} > */}
 
       </div>
       <Layout.Sider
-        className='hidden sm:block fixed top-0 left-0 z-50 h-full shadow-md pt-12'
+        className='hidden md:block fixed top-0 left-0 z-50 h-full shadow-md pt-12'
         theme='light'
         collapsible
         collapsed={collapsed}

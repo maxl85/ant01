@@ -55,49 +55,44 @@ const Dashboard: FC = () => {
         <Layout>
           <Header />
           <Layout className='px-6'>
-            {/* <Layout.Content className='p-6 my-4 bg-white shadow-md'>
-              <Row>
-                <Col md={24} lg={{ span: 12, offset: 6 }}>
-                  <Table />
-                </Col>
-              </Row>
-            </Layout.Content> */}
-            <Layout.Content className='p-6 my-4'>
-              <Row gutter={[16, 16]}>
-                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
-                    <AreaPlot />
-                  </Card>
-                </Col>
-                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
-                    <AreaPlotValue />
-                  </Card>
-                </Col>
-                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
-                    <BarPlot />
-                  </Card>
-                </Col>
-                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
-                    <BulletPlot />
-                  </Card>
-                </Col>
-              </Row>
+            <Row>
+              <Col xs={24} lg={{ span: 22, offset: 1 }} xl={{ span: 20, offset: 2 }}>
 
-              <Row gutter={[16, 16]} className='mt-10'>
-                {/* <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <Calendar title='Май' />
-                </Col> */}
-                <Col xs={24} sm={24} md={24} lg={24} xl={18}>
-                  <Table />
-                </Col>
-              </Row>
+                <Layout.Content className='p-6 my-4'>
+                  <Row gutter={[16, 16]}>
+                    <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                      <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                        <AreaPlot />
+                      </Card>
+                    </Col>
+                    <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                      <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                        <AreaPlotValue />
+                      </Card>
+                    </Col>
+                    <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                      <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                        <BarPlot />
+                      </Card>
+                    </Col>
+                    <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                      <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                        <BulletPlot />
+                      </Card>
+                    </Col>
+                  </Row>
 
-            </Layout.Content>
-            <Footer />
+                  <Row gutter={[16, 16]} className='mt-10'>
+                    <Col>
+                      <Table />
+                    </Col>
+                  </Row>
+
+                </Layout.Content>
+              </Col>
+            </Row>
           </Layout>
+          <Footer />
         </Layout>
       </Layout>
     </>
