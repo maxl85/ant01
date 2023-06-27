@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import { notification, Layout, Row, Col, Image } from 'antd';
+import { notification, Layout, Row, Col, Image, Card, Statistic } from 'antd';
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+
 
 import { useGetAllCostsQuery } from '../redux/cost/costApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
@@ -11,10 +13,14 @@ import Sider from '../layout/Sider';
 import Table from '../components/Table';
 import WeekBox from '../components/WeekBox';
 import Calendar from '../components/Calendar';
+import AreaPlot from '../components/AreaPlot';
+import AreaPlotValue from '../components/AreaPlotValue';
+import BarPlot from '../components/BarPlot';
+import BulletPlot from '../components/BulletPlot';
 
 
 
-const Costs: FC = () => {
+const Dashboard: FC = () => {
   const navigate = useNavigate();
   const { data, error, isError, isLoading } = useGetAllCostsQuery();
 
@@ -59,23 +65,31 @@ const Costs: FC = () => {
             <Layout.Content className='p-6 my-4'>
               <Row gutter={[16, 16]}>
                 <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <WeekBox month='Январь' />
+                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                    <AreaPlot />
+                  </Card>
                 </Col>
                 <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <WeekBox month='Февраль' />
+                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                    <AreaPlotValue />
+                  </Card>
                 </Col>
                 <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <WeekBox month='Март' />
+                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                    <BarPlot />
+                  </Card>
                 </Col>
                 <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
-                  <WeekBox month='Апрель' />
+                  <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
+                    <BulletPlot />
+                  </Card>
                 </Col>
               </Row>
 
               <Row gutter={[16, 16]} className='mt-10'>
-                <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
+                {/* <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
                   <Calendar title='Май' />
-                </Col>
+                </Col> */}
                 <Col xs={24} sm={24} md={24} lg={24} xl={18}>
                   <Table />
                 </Col>
@@ -90,4 +104,4 @@ const Costs: FC = () => {
   );
 };
 
-export default Costs;
+export default Dashboard;

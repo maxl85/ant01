@@ -20,11 +20,11 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Dashboard', '1', <PieChartOutlined />),
-  getItem('Option 1', '2', <DesktopOutlined />),
-  getItem('Option 2', 'sub1', <UserOutlined />, [
-    getItem('Option 2.1', '3'),
-    getItem('Option 2.2', '4'),
-    getItem('Option 2.3', '5'),
+  // getItem('Option 1', '2', <DesktopOutlined />),
+  getItem('Цех', 'sub1', <DesktopOutlined />, [
+    getItem('Цех 1', '3'),
+    getItem('Цех 2', '4'),
+    getItem('Цех 3', '5'),
   ]),
   // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),

@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
-import Costs from './pages/Costs';
+import Costs from './pages/Dashboard';
 import { RootState } from './redux/store';
 import { removeUser } from './utils/auth';
 import { setAuth, setUsername } from './redux/auth/slice';
