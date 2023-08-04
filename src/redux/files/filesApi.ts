@@ -20,18 +20,16 @@ export interface IUser {
 
 export interface ICost {
   id: number;
-  text: string;
-  date: string;
-  price: number;
-  user: IUser;
+  camId: string;
+  filename: string;
+  dateTime: string;
   createdAt: string;
-  updatedAt: string;
 }
 
 type CostResponse = ICost[];
 
 
-export const costhApi = createApi({
+export const filesApi = createApi({
   reducerPath: 'costApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SERVER_URL,
@@ -50,4 +48,4 @@ export const costhApi = createApi({
   }),
 });
 
-export const { useGetAllCostsQuery } = costhApi;
+export const { useGetAllCostsQuery } = filesApi;

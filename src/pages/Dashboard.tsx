@@ -4,7 +4,7 @@ import { notification, Layout, Row, Col, Image, Card, Statistic, Spin } from 'an
 // import { useNavigate } from 'react-router-dom';
 
 
-import { useGetAllCostsQuery } from '../redux/cost/costApi';
+import { useGetAllCostsQuery } from '../redux/files/filesApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
 import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
@@ -20,15 +20,88 @@ import BulletPlot from '../components/BulletPlot';
 
 
 
+// interface IData {
+//   id: number;
+//   date: string;
+//   timeVisit1: string;
+//   lengthVisit1: number;
+//   imageVisit1: string;
+//   timeVisit2: string;
+//   lengthVisit2: number;
+//   imageVisit2: string;
+// }
+
+interface IVisits {
+  time: string;
+  length: number;
+  image: string;
+}
+
+interface IData {
+  id: number;
+  date: string;
+  visits: IVisits[];
+}
+
 const Dashboard: FC = () => {
   // const navigate = useNavigate();
   const { data, error, isError, isLoading } = useGetAllCostsQuery();
 
   const [msg, contextHolder] = notification.useNotification();
 
+  
+  const tableData: IData[] = [];
+  
   if (!isLoading) {
-    console.log(data)
+    // console.log(data)
+    
+    let curDate = '';
+    let prevDate = '';
+    const visits: IVisits[] = [];
+    data?.forEach((item, i) => {
+      
+      curDate =  new Date(item.dateTime).toLocaleDateString();
+      console.log(curDate)
+      
+      if(prevDate === '') prevDate = curDate;
+      
+      if(curDate === prevDate)
+      {
+        
+      }
+      
+      prevDate = curDate;
+      
+      // let d: IData = {
+      //   id: i,
+      //   date: '',
+      //   timeVisit1: '',
+      //   lengthVisit1: 0,
+      //   imageVisit1: process.env.REACT_APP_SERVER_URL + '/files/' + item.filename,
+      //   timeVisit2: '',
+      //   lengthVisit2: 0,
+      //   imageVisit2: process.env.REACT_APP_SERVER_URL + '/files/' + item.filename,
+      // };
+      // tableData.push(d);
+
+    //   tableData.push(
+    //     {
+    //       id: i,
+    //       date: '',
+    //       timeVisit1: '',
+    //       lengthVisit1: 0,
+    //       imageVisit1: process.env.REACT_APP_SERVER_URL + '/files/' + item.filename,
+    //       timeVisit2: '',
+    //       lengthVisit2: 0,
+    //       imageVisit2: process.env.REACT_APP_SERVER_URL + '/files/' + item.filename,
+    //     }
+    //   );
+    });
+
+    // console.log(tableData)
   }
+
+
 
   useEffect(() => {
     if (isApiErrorResponse(error)) {
@@ -87,7 +160,7 @@ const Dashboard: FC = () => {
 
                   <Row gutter={[16, 16]} className='mt-10'>
                     <Col>
-                      <Table />
+                      <Table tableData={tableData} />
                     </Col>
                   </Row>
 

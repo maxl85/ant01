@@ -1,12 +1,13 @@
 import React from 'react';
 import { Table, Image, Progress } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
-import jsonData from '../mock/localData2.json';
+// import jsonData from '../mock/localData2.json';
 import FillCell from './FillCell/FillCell';
 
 
-interface IDataType {
+interface IData {
   id: number;
   date: string;
   timeVisit1: string;
@@ -18,14 +19,9 @@ interface IDataType {
 }
 
 
-const dataSource = jsonData.map(item => ({...item, key: item.id}));
+// const dataSource = jsonData.map(item => ({...item, key: item.id}));
 
-function tst(img: string) {
-  console.log(img)
-  return 'https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png';
-}
-
-const columns: ColumnsType<IDataType> = [
+const columns: ColumnsType<IData> = [
   {
     title: 'Дата',
     dataIndex: 'date',
@@ -54,10 +50,11 @@ const columns: ColumnsType<IDataType> = [
     key: 'imageVisit1',
     // width: 80,
     render: img => <Image
-                        // src={img}
-                        // src='http://158.160.2.88:7777/api/files/2023-08-03%2015%3A45%3A59.jpg'
-                        // src='https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png'
-                        src={tst(img)}
+                        src={img}
+                        // src='http://158.160.2.88:7777/api/files/cam03.png'
+                        // preview={{
+                        //   src: 'http://158.160.2.88:7777/api/files/2023-08-03%2015%3A45%3A59.jpg',
+                        // }}
                         alt='img'
                         width={25}
                         height={25}
@@ -103,11 +100,11 @@ const columns: ColumnsType<IDataType> = [
   
 ];
 
-const _Table = () => {
+const _Table = ({tableData}: {tableData: IData[]}) => {
   return (
     <Table
       // className='shadow-md p-2'
-      dataSource={dataSource}
+      dataSource={tableData}
       columns={columns}
       size='small'
       scroll={{ x: 775, y: 470 }}

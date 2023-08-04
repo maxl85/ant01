@@ -1,5 +1,5 @@
 import { Menu, MenuProps } from 'antd';
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'; import { useGetAllCostsQuery } from '../redux/cost/costApi';
+import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 type MenuItem = Required<MenuProps>['items'][number];
