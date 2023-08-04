@@ -1,35 +1,25 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Drawer, Layout, Avatar, Badge, Dropdown } from 'antd';
-import { MenuUnfoldOutlined, UserOutlined, BellOutlined, SearchOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, UserOutlined, BellOutlined, LogoutOutlined, SearchOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
+
+import { removeUser } from '../utils/auth';
 
 import logo from '../logo.svg';
 import Menu from '../components/Menu';
+
+const onClick: MenuProps['onClick'] = ({ key }) => {
+  if (key==='1') { removeUser(); }
+};
 
 const items: MenuProps['items'] = [
   {
     key: '1',
     label: (
-      <a href="#">
-        1st menu item
-      </a>
+      <Link to="/login">Выход</Link>
     ),
-  },
-  {
-    key: '2',
-    label: (
-      <a href="#">
-        2nd menu item
-      </a>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <a href="#">
-        3rd menu item
-      </a>
-    ),
+    icon: <LogoutOutlined />
   },
 ];
 
@@ -47,18 +37,14 @@ const _Header: FC = () => {
           icon={<MenuUnfoldOutlined />}
           onClick={() => setDrawerOpen(true)}
         />
-        {/* <div className='flex items-center gap-2'>
-            <BsPiggyBank className='text-white text-3xl' />
-            <div className='text-white text-2xl'>Агроком</div>
-          </div> */}
         <img src={logo} className='h-9' alt='logo' />
-        <div className='flex items-baseline gap-5'>
+        <div className='flex items-baseline gap-5 mr-4 md:mr-0'>
           {/* <SearchOutlined className='text-white text-xl' /> */}
-          <Badge style={{ boxShadow: 'none' }} count={5} size='small'>
+          <Badge style={{ boxShadow: 'none' }} count={0} size='small'>
             <BellOutlined className='text-white text-xl' />
           </Badge>
 
-          <Dropdown menu={{ items }} placement="bottomRight" arrow>
+          <Dropdown menu={{ items, onClick }} placement="bottomRight" arrow>
             <Avatar className='bg-green-500 hover:cursor-pointer' icon={<UserOutlined />} />
           </Dropdown>
         </div>

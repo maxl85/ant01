@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { notification, Layout, Row, Col, Image, Card, Statistic } from 'antd';
-import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { notification, Layout, Row, Col, Image, Card, Statistic, Spin } from 'antd';
+// import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
+// import { useNavigate } from 'react-router-dom';
 
 
 import { useGetAllCostsQuery } from '../redux/cost/costApi';
@@ -11,8 +11,8 @@ import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Sider from '../layout/Sider';
 import Table from '../components/Table';
-import WeekBox from '../components/WeekBox';
-import Calendar from '../components/Calendar';
+// import WeekBox from '../components/WeekBox';
+// import Calendar from '../components/Calendar';
 import AreaPlot from '../components/AreaPlot';
 import AreaPlotValue from '../components/AreaPlotValue';
 import BarPlot from '../components/BarPlot';
@@ -21,13 +21,13 @@ import BulletPlot from '../components/BulletPlot';
 
 
 const Dashboard: FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data, error, isError, isLoading } = useGetAllCostsQuery();
 
   const [msg, contextHolder] = notification.useNotification();
 
   if (!isLoading) {
-    // console.log(data)
+    console.log(data)
   }
 
   useEffect(() => {
@@ -39,11 +39,11 @@ const Dashboard: FC = () => {
         msg.error({ message: `Ошибка ${error.status} (${error.data.error})`, description: error.data.message });
       }
     }
-  }, [error, msg, navigate]);
+  }, [error, msg]);
 
 
-  // if (isLoading) return <h1>Loading...</h1>;
-  // if (!data) return <h1>No data :(</h1>;
+  // if (isLoading) return <h1 className='text-center mt-5'>Загрузка...</h1>;
+  // if (!data) return <h1>Нет данных :(</h1>;
   // if (!data) return <>{JSON.stringify(error, null, 2)}</>;
 
   // TODO Add Spin for loading
@@ -55,6 +55,9 @@ const Dashboard: FC = () => {
         <Layout>
           <Header />
           <Layout className='px-6'>
+            {/* {isLoading &&
+              <Spin tip="Загрузка" size="large" className='mt-10'></Spin>
+            } */}
             <Row>
               <Col xs={24} lg={{ span: 22, offset: 1 }} xl={{ span: 20, offset: 2 }}>
 

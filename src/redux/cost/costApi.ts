@@ -36,7 +36,7 @@ export const costhApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SERVER_URL,
     prepareHeaders: (headers) => {
-      const token = JSON.parse(localStorage.getItem('auth') || '{}')?.access_token ?? '';
+      const token = JSON.parse(localStorage.getItem('auth') || '{}')?.token ?? '';
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -45,7 +45,7 @@ export const costhApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllCosts: builder.query<CostResponse, void>({
-      query: () => 'costs',
+      query: () => 'files',
     }),
   }),
 });

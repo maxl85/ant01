@@ -20,6 +20,11 @@ interface IDataType {
 
 const dataSource = jsonData.map(item => ({...item, key: item.id}));
 
+function tst(img: string) {
+  console.log(img)
+  return 'https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png';
+}
+
 const columns: ColumnsType<IDataType> = [
   {
     title: 'Дата',
@@ -49,7 +54,10 @@ const columns: ColumnsType<IDataType> = [
     key: 'imageVisit1',
     // width: 80,
     render: img => <Image
-                        src={img}
+                        // src={img}
+                        // src='http://158.160.2.88:7777/api/files/2023-08-03%2015%3A45%3A59.jpg'
+                        // src='https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png'
+                        src={tst(img)}
                         alt='img'
                         width={25}
                         height={25}
