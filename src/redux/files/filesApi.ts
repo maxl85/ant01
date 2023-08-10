@@ -18,7 +18,7 @@ export interface IUser {
   updatedAt: string;
 }
 
-export interface ICost {
+export interface IFiles {
   id: number;
   camId: string;
   filename: string;
@@ -42,7 +42,7 @@ export const filesApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllCosts: builder.query<ICost[], void>({
+    getAllCosts: builder.query<IFiles[], void>({
       query: () => 'files',
     }),
   }),

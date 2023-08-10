@@ -4,7 +4,7 @@ import { notification, Layout, Row, Col, Image, Card, Statistic, Spin } from 'an
 // import { useNavigate } from 'react-router-dom';
 
 
-import { useGetAllCostsQuery } from '../redux/files/filesApi';
+import { IFiles, useGetAllCostsQuery } from '../redux/files/filesApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
 import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
@@ -34,11 +34,11 @@ import BulletPlot from '../components/BulletPlot';
 interface IVisits {
   time: string;
   length: number;
-  image: string;
+  image1: string;
+  image2: string;
 }
 
 interface IData {
-  id: number;
   date: string;
   visits: IVisits[];
 }
@@ -50,7 +50,8 @@ const Dashboard: FC = () => {
   const [msg, contextHolder] = notification.useNotification();
 
   
-  const tableData: IData[] = [];
+  const tableData1: IData[] = [];
+  const tableData2: IData[] = [];
   
   if (!isLoading) {
     // console.log(data)
@@ -58,19 +59,83 @@ const Dashboard: FC = () => {
     let curDate = '';
     let prevDate = '';
     const visits: IVisits[] = [];
-    data?.forEach((item, i) => {
+    let i1 = 0;
+    let i2 = 0;
+    let j1 = 0;
+    let j2 = 0;
+    let prevItem: IFiles;
+    data?.forEach((item, idx) => {
+      if (prevItem === undefined) prevItem = item;
       
-      curDate =  new Date(item.dateTime).toLocaleDateString();
-      // console.log(curDate)
+      const itemDate = new Date(item.dateTime.slice(0, -1));
+      const prevItemDate = new Date(prevItem.dateTime.slice(0, -1));
+      // curDate = String(itemDate.getDate()).padStart(2, '0') + '.' + 
+      //           String(itemDate.getMonth() + 1).padStart(2, '0') + '.' + 
+      //           itemDate.getFullYear();
+      // const curTime = String(itemDate.getHours()).padStart(2, '0') + ':' +
+      //               String(itemDate.getMinutes()).padStart(2, '0');
+      curDate =  itemDate.toLocaleDateString();
+      const curTime =  itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       
-      if(prevDate === '') prevDate = curDate;
+      // if(prevDate === '') prevDate = curDate;
       
+      // console.log(curDate, prevDate)
       if(curDate === prevDate)
       {
+        
+        // console.log('vLength1', vLength1)
+        if (item.camId === 'cam1_2') {
+          const vLength1 = tableData1[i1-1].visits.length;
+          const d1 = prevItemDate.getTime();
+          const d2 = itemDate.getTime();
+          const diff = Math.ceil((d2 - d1) / 60000);
+          tableData1[i1 - 1].visits[vLength1 - 1].length = diff;
+          tableData1[i1 - 1].visits[vLength1 - 1].image2 = item.filename;
+          // j1 = j1 + 1;
+        }
+        if (item.camId === 'cam1_1') {
+          tableData1[i1 - 1].visits.push({time: curTime, length: 0, image1: item.filename, image2: ''});
+        }
+        
+        
+        
+        if (item.camId === 'cam2_2') {
+          const vLength2 = tableData2[i2-1].visits.length;
+          const d1 = prevItemDate.getTime();
+          const d2 = itemDate.getTime();
+          const diff = Math.ceil((d2 - d1) / 60000);
+          tableData2[i2 - 1].visits[vLength2 - 1].length = diff;
+          tableData2[i2 - 1].visits[vLength2 - 1].image2 = item.filename;
+          // j2 = j2 + 1;
+        }
+        if (item.camId === 'cam2_1') {
+          tableData2[i2 - 1].visits.push({time: curTime, length: 0, image1: item.filename, image2: ''});
+        }
+        
+      } else {
+        if (item.camId === 'cam1_1') {
+          tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: item.filename, image2: ''}]});
+          i1 = i1 + 1;
+          // j1 = 1;
+        }
+        // if (item.camId === 'cam1_2') {
+        //   tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: '', image2: ''}]});
+        // }
+        
+        if (item.camId === 'cam2_1') {
+          tableData2.push({date: curDate, visits:[{time: curTime, length: 0, image1: item.filename, image2: ''}]});
+          i2 = i2 + 1;
+          // j2 = 1;
+        }
+        // if (item.camId === 'cam2_2') {
+        //   tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: '', image2: ''}]});
+        // }
+        
         
       }
       
       prevDate = curDate;
+      prevItem = item;
       
       // let d: IData = {
       //   id: i,
@@ -100,6 +165,8 @@ const Dashboard: FC = () => {
 
     // console.log(tableData)
   }
+  console.log('tableData1', tableData1)
+  console.log('tableData2', tableData2)
 
 
 
