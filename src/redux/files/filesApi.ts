@@ -26,7 +26,7 @@ export interface ICost {
   createdAt: string;
 }
 
-type CostResponse = ICost[];
+// export type CostResponse = ICost[];
 
 
 export const filesApi = createApi({
@@ -42,7 +42,7 @@ export const filesApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllCosts: builder.query<CostResponse, void>({
+    getAllCosts: builder.query<ICost[], void>({
       query: () => 'files',
     }),
   }),

@@ -61,7 +61,7 @@ const Dashboard: FC = () => {
     data?.forEach((item, i) => {
       
       curDate =  new Date(item.dateTime).toLocaleDateString();
-      console.log(curDate)
+      // console.log(curDate)
       
       if(prevDate === '') prevDate = curDate;
       
@@ -160,7 +160,7 @@ const Dashboard: FC = () => {
 
                   <Row gutter={[16, 16]} className='mt-10'>
                     <Col>
-                      <Table tableData={tableData} />
+                      {/* <Table tableData={tableData} /> */}
                     </Col>
                   </Row>
 
