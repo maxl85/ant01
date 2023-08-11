@@ -32,6 +32,7 @@ const App: FC = () => {
         <Route path='/login' element={isLoggedIn ? <Navigate to='/dashboard' /> : <Login />} />
         <Route path='/dashboard' element={isLoggedIn ? <Dashboard /> : <Navigate to='/login' />} />
         <Route path='/server' element={isLoggedIn ? <Server /> : <Navigate to='/login' />} />
+        {/* <Route path='/server' element={<Server />} /> */}
         <Route path='*' element={<h1>Not Found</h1>} />
       </Routes>
     </>

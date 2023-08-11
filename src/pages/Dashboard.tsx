@@ -262,14 +262,14 @@ const Dashboard: FC = () => {
         <Sider />
         <Layout>
           <Header />
-          <Layout className='px-6'>
+          <Layout className='sm:px-6'>
             {/* {isLoading &&
               <Spin tip="Загрузка" size="large" className='mt-10'></Spin>
             } */}
             <Row>
               <Col xs={24} lg={{ span: 22, offset: 1 }} xl={{ span: 20, offset: 2 }}>
 
-                <Layout.Content className='p-6 my-4'>
+                <Layout.Content className='p-3 sm:p-6 my-4'>
                   <Row gutter={[16, 16]}>
                     <Col className='border-2' xs={24} sm={12} md={12} lg={12} xl={6}>
                       <Card bordered={false} bodyStyle={{ padding: '5px 10px' }}>
@@ -295,7 +295,10 @@ const Dashboard: FC = () => {
 
                   <Row gutter={[16, 16]} className='mt-10'>
                     <Col>
+                      <div className='text-xl mb-5 text'>Цех 1</div>
                       <Table2 tableData={tableData1} />
+                      <div className='text-xl mb-5 text'>Цех 2</div>
+                      <Table2 tableData={tableData2} />
                     </Col>
                   </Row>
 
