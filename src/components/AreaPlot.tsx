@@ -10,6 +10,7 @@ const AreaPlot = () => {
   const config: TinyAreaConfig = {
     height: 60,
     autoFit: true,
+    // animation: false,
     data,
     smooth: true,
     areaStyle: {

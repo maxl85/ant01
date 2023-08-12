@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, MemoryRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
@@ -27,7 +27,7 @@ const App: FC = () => {
   return (
     <>
       <Routes>
-        <Route path='/' element={isLoggedIn ? <Navigate to='/dashboard' /> : <Navigate to='login' />} />
+        <Route path='/' element={isLoggedIn ? <Navigate to='/dashboard' /> : <Navigate to='/login' />} />
         <Route path='/registration' element={isLoggedIn ? <Navigate to='/dashboard' /> : <Registration />} />
         <Route path='/login' element={isLoggedIn ? <Navigate to='/dashboard' /> : <Login />} />
         <Route path='/dashboard' element={isLoggedIn ? <Dashboard /> : <Navigate to='/login' />} />
