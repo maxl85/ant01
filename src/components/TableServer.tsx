@@ -23,13 +23,13 @@ const columns: ColumnsType<IFiles> = [
   {
     title: 'id',
     dataIndex: 'id',
-    width: 100,
+    width: 50,
     key: 'id',
   },
   {
     title: 'camId',
     dataIndex: 'camId',
-    // width: 100,
+    width: 80,
     key: 'camId',
   },
   // {
@@ -40,19 +40,20 @@ const columns: ColumnsType<IFiles> = [
   {
     title: 'dateTime',
     dataIndex: 'dateTime',
+    width: 190,
     key: 'dateTime',
   },
   {
     title: 'createdAt',
     dataIndex: 'createdAt',
+    width: 190,
     key: 'createdAt',
   },
   {
     title: 'image',
     dataIndex: 'filename',
-    // width: 100,
     key: 'filename',
-    // width: 80,
+    width: 80,
     render: (img) => <Image
                         // src={img}
                         // src={`http://158.160.2.88:7777/api/files/${img}`}
@@ -79,11 +80,11 @@ const _Table = ({tableData}: {tableData: IFiles[]}) => {
       dataSource={tableData}
       columns={columns}
       size='small'
-      scroll={{ x: 775, y: 470 }}
+      scroll={{ y: 870 }}
       pagination={{
-        defaultPageSize: 10,
+        defaultPageSize: 15,
         showSizeChanger: true,
-        pageSizeOptions: [10, 15, 20],
+        pageSizeOptions: [15, 20, 30],
       }}
     />
   );
