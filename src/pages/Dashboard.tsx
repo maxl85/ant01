@@ -10,7 +10,8 @@ import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Sider from '../layout/Sider';
-import Table2 from '../components/Table2';
+// import Table2 from '../components/Table2';
+import Table3 from '../components/Table3';
 // import WeekBox from '../components/WeekBox';
 // import Calendar from '../components/Calendar';
 import AreaPlot from '../components/AreaPlot';
@@ -47,7 +48,7 @@ const Dashboard: FC = () => {
   const filesPath = process.env.REACT_APP_SERVER_URL + '/files/';
 
   // Вынести в настройки на сайте??????
-  const minTimeDiff = 60;
+  const minTimeDiff = 30;
 
   if (!isLoading) {
     // console.log(data)
@@ -77,7 +78,6 @@ const Dashboard: FC = () => {
         if (diff < minTimeDiff) {
           if (item.camId === 'cam1_1') {
             tableData1[iData - 1].visits[iVisit - 1].cam1.push(filesPath + item.filename);
-            
           }
           
           if (item.camId === 'cam1_2') {
@@ -96,7 +96,7 @@ const Dashboard: FC = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: false,
+            full: item.camId === 'cam1_2',
             cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
             cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
           });
@@ -113,7 +113,7 @@ const Dashboard: FC = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: false,
+            full: item.camId === 'cam1_2',
             cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
             cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
           }]
@@ -125,7 +125,7 @@ const Dashboard: FC = () => {
       prevDate = curDate;
       prevItem = item;
     });
-    console.log('tableData1', tableData1)
+    // console.log('tableData1', tableData1)
 
 
     const d2 = data?.filter((el) => (el.camId === 'cam2_1' || el.camId === 'cam2_2'));
@@ -153,7 +153,6 @@ const Dashboard: FC = () => {
         if (diff < minTimeDiff) {
           if (item.camId === 'cam2_1') {
             tableData2[iData - 1].visits[iVisit - 1].cam1.push(filesPath + item.filename);
-            
           }
           
           if (item.camId === 'cam2_2') {
@@ -172,7 +171,7 @@ const Dashboard: FC = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: false,
+            full: item.camId === 'cam2_2',
             cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
             cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
           });
@@ -189,7 +188,7 @@ const Dashboard: FC = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: false,
+            full: item.camId === 'cam2_2',
             cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
             cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
           }]
@@ -201,7 +200,7 @@ const Dashboard: FC = () => {
       prevDate = curDate;
       prevItem = item;
     });
-    console.log('tableData2', tableData2)
+    // console.log('tableData2', tableData2)
 
   }
 
@@ -263,10 +262,10 @@ const Dashboard: FC = () => {
 
                   <Row gutter={[16, 16]} className='mt-10'>
                     <Col>
-                      {/* <div className='text-xl mb-5 text'>Цех 1</div>
-                      <Table2 tableData={tableData1} />
-                      <div className='text-xl mb-5 text'>Цех 2</div>
-                      <Table2 tableData={tableData2} /> */}
+                      <div className='text-xl mb-5 text'>Проход 1</div>
+                      <Table3 tableData={tableData1} />
+                      <div className='text-xl mb-5 text'>Проход 2</div>
+                      <Table3 tableData={tableData2} />
                     </Col>
                   </Row>
 

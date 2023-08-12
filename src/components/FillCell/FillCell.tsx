@@ -6,11 +6,11 @@ interface FillCellProps {
 }
 
 const FillCell: FC<FillCellProps> = ({ value }) => {
-  const percentage = value * 4;
+  const percentage = value * 10;
   let threeColor;
-  if (value < 10) {
+  if (value < 5) {
     threeColor = styles.red;
-  } else if ( value >= 10 && value < 15) {
+  } else if ( value >= 5 && value < 10) {
     threeColor = styles.yellow;
   } else {
     threeColor = styles.green;
