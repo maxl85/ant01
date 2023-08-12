@@ -1,0 +1,72 @@
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(32, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-03 15:40:00.000', '2023-08-03 12:46:01.822', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(33, 'cam1_2', '2023-08-03 15:47:50.jpg', '2023-08-03 15:45:00.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(34, 'cam1_1', '2023-08-03 15:51:18.jpg', '2023-08-03 17:40:00.000', '2023-08-11 12:27:46.123', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(35, 'cam1_2', '2023-08-03 15:52:33.jpg', '2023-08-03 17:46:00.000', '2023-08-11 12:28:38.155', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(36, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-04 15:40:00.000', '2023-08-11 12:31:06.211', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(37, 'cam1_2', '2023-08-03 15:47:50.jpg', '2023-08-04 15:43:00.000', '2023-08-11 12:31:44.175', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(38, 'cam2_1', '2023-08-03 15:45:59.jpg', '2023-08-06 15:40:00.000', '2023-08-11 12:32:42.811', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(39, 'cam2_2', '2023-08-03 15:47:50.jpg', '2023-08-06 15:48:00.000', '2023-08-11 12:33:36.043', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(40, 'cam2_1', '2023-08-03 15:51:18.jpg', '2023-08-06 15:50:00.000', '2023-08-11 12:34:21.391', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(41, 'cam2_2', '2023-08-03 15:52:33.jpg', '2023-08-06 15:55:00.000', '2023-08-11 12:35:30.351', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(42, 'cam2_1', '2023-08-03 15:53:47.jpg', '2023-08-06 16:50:48.000', '2023-08-11 12:36:13.659', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(43, 'cam2_2', '2023-08-03 16:13:51.jpg', '2023-08-06 17:00:00.000', '2023-08-11 12:36:36.867', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(44, 'cam2_1', '2023-08-03 15:53:47.jpg', '2023-08-06 18:50:48.000', '2023-08-11 12:36:13.659', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(45, 'cam2_2', '2023-08-03 16:13:51.jpg', '2023-08-06 19:10:00.000', '2023-08-11 12:36:36.867', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(46, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-03 15:40:02.000', '2023-08-03 12:46:01.822', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(47, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-03 15:40:04.000', '2023-08-03 12:46:01.822', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(48, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-03 15:40:08.000', '2023-08-03 12:46:01.822', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(49, 'cam1_1', '2023-08-03 15:45:59.jpg', '2023-08-03 15:40:10.000', '2023-08-03 12:46:01.822', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(50, 'cam1_2', '2023-08-03 15:47:50.jpg', '2023-08-03 15:45:02.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(51, 'cam1_2', '2023-08-03 15:47:50.jpg', '2023-08-03 15:45:04.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(52, 'cam1_2', '2023-08-03 15:47:50.jpg', '2023-08-03 15:45:08.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(53, 'cam1_1', '2023-08-03 15:47:50.jpg', '2023-08-03 15:50:00.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(54, 'cam1_1', '2023-08-03 15:47:50.jpg', '2023-08-03 15:51:00.000', '2023-08-03 12:47:52.394', 1);
+INSERT INTO public.files
+(id, "camId", filename, "dateTime", "createdAt", "userId")
+VALUES(55, 'cam1_1', '2023-08-03 15:47:50.jpg', '2023-08-03 15:52:00.000', '2023-08-03 12:47:52.394', 1);

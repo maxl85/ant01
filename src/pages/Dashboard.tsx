@@ -20,10 +20,13 @@ import BulletPlot from '../components/BulletPlot';
 
 
 interface IVisits {
+  start: Date;
+  end: Date;
   time: string;
   length: number;
-  image1: string;
-  image2: string;
+  full: boolean;
+  cam1: string[];
+  cam2: string[];
 }
 
 interface IData {
@@ -37,204 +40,169 @@ const Dashboard: FC = () => {
 
   const [msg, contextHolder] = notification.useNotification();
 
-  
+
   const tableData1: IData[] = [];
   const tableData2: IData[] = [];
-  
-  // if (!isLoading) {
-  //   // console.log(data)
-    
-  //   let curDate = '';
-  //   let prevDate = '';
-  //   const visits: IVisits[] = [];
-  //   let i1 = 0;
-  //   let i2 = 0;
-  //   let j1 = 0;
-  //   let j2 = 0;
-  //   let prevItem: IFiles;
-  //   data?.forEach((item, idx) => {
-  //     if (prevItem === undefined) prevItem = item;
-      
-  //     const itemDate = new Date(item.dateTime.slice(0, -1));
-  //     const prevItemDate = new Date(prevItem.dateTime.slice(0, -1));
-  //     // curDate = String(itemDate.getDate()).padStart(2, '0') + '.' + 
-  //     //           String(itemDate.getMonth() + 1).padStart(2, '0') + '.' + 
-  //     //           itemDate.getFullYear();
-  //     // const curTime = String(itemDate.getHours()).padStart(2, '0') + ':' +
-  //     //               String(itemDate.getMinutes()).padStart(2, '0');
-  //     curDate =  itemDate.toLocaleDateString();
-  //     const curTime =  itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      
-  //     // if(prevDate === '') prevDate = curDate;
-      
-  //     // console.log(curDate, prevDate)
-  //     if(curDate === prevDate)
-  //     {
-        
-  //       // console.log('vLength1', vLength1)
-  //       if (item.camId === 'cam1_2') {
-  //         const vLength1 = tableData1[i1-1].visits.length;
-  //         const d1 = prevItemDate.getTime();
-  //         const d2 = itemDate.getTime();
-  //         const diff = Math.ceil((d2 - d1) / 60000);
-  //         tableData1[i1 - 1].visits[vLength1 - 1].length = diff;
-  //         tableData1[i1 - 1].visits[vLength1 - 1].image2 = item.filename;
-  //         // j1 = j1 + 1;
-  //       }
-  //       if (item.camId === 'cam1_1') {
-  //         tableData1[i1 - 1].visits.push({time: curTime, length: 0, image1: item.filename, image2: ''});
-  //       }
-        
-        
-        
-  //       if (item.camId === 'cam2_2') {
-  //         const vLength2 = tableData2[i2-1].visits.length;
-  //         const d1 = prevItemDate.getTime();
-  //         const d2 = itemDate.getTime();
-  //         const diff = Math.ceil((d2 - d1) / 60000);
-  //         tableData2[i2 - 1].visits[vLength2 - 1].length = diff;
-  //         tableData2[i2 - 1].visits[vLength2 - 1].image2 = item.filename;
-  //         // j2 = j2 + 1;
-  //       }
-  //       if (item.camId === 'cam2_1') {
-  //         tableData2[i2 - 1].visits.push({time: curTime, length: 0, image1: item.filename, image2: ''});
-  //       }
-        
-  //     } else {
-  //       if (item.camId === 'cam1_1') {
-  //         tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: item.filename, image2: ''}]});
-  //         i1 = i1 + 1;
-  //         // j1 = 1;
-  //       }
-  //       // if (item.camId === 'cam1_2') {
-  //       //   tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: '', image2: ''}]});
-  //       // }
-        
-  //       if (item.camId === 'cam2_1') {
-  //         tableData2.push({date: curDate, visits:[{time: curTime, length: 0, image1: item.filename, image2: ''}]});
-  //         i2 = i2 + 1;
-  //         // j2 = 1;
-  //       }
-  //       // if (item.camId === 'cam2_2') {
-  //       //   tableData1.push({date: curDate, visits:[{time: curTime, length: 0, image1: '', image2: ''}]});
-  //       // }
-  //     }
-      
-  //     prevDate = curDate;
-  //     prevItem = item;
-      
-  // }
-  // console.log('tableData1', tableData1)
-  // console.log('tableData2', tableData2)
-  
+
   const filesPath = process.env.REACT_APP_SERVER_URL + '/files/';
-  
+
+  // Вынести в настройки на сайте??????
+  const minTimeDiff = 60;
+
   if (!isLoading) {
-      // console.log(data)
-      
-      const d1 = data?.filter((el) => (el.camId==='cam1_1' || el.camId==='cam1_2'));
-      // console.log(d1)
-      let curDate = '';
-      let prevDate = '';
-      let i = 0;
-      let prevItem: IFiles;
-      d1?.forEach((item, idx) => {
-        if (prevItem === undefined) prevItem = item;
-        
-        const itemDate = new Date(item.dateTime.slice(0, -1));
-        const prevItemDate = new Date(prevItem.dateTime.slice(0, -1));
-        curDate =  itemDate.toLocaleDateString();
-        const curTime =  itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        if(curDate === prevDate) {
+    // console.log(data)
+
+    const d1 = data?.filter((el) => (el.camId === 'cam1_1' || el.camId === 'cam1_2'));
+    d1?.sort((a, b) => (a.dateTime > b.dateTime) ? 1 : -1);
+    // console.log(d1)
+    let curDate = '';
+    let prevDate = '';
+    let iData = 0;
+    let iVisit = 0;
+    let prevItem: IFiles = {} as IFiles;
+    d1?.forEach((item, idx) => {
+      if (idx === 0) prevItem = item;
+
+      const itemDate = new Date(item.dateTime.slice(0, -1));
+      const prevItemDate = new Date(prevItem.dateTime.slice(0, -1));
+
+      const d1 = prevItemDate.getTime();
+      const d2 = itemDate.getTime();
+      const diff = Math.ceil((d2 - d1) / 60000);
+
+      curDate = itemDate.toLocaleDateString();
+      const curTime = itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      if (curDate === prevDate) {
+        if (diff < minTimeDiff) {
+          if (item.camId === 'cam1_1') {
+            tableData1[iData - 1].visits[iVisit - 1].cam1.push(filesPath + item.filename);
+            
+          }
+          
           if (item.camId === 'cam1_2') {
-            const vLength1 = tableData1[i-1].visits.length;
-            const d1 = prevItemDate.getTime();
-            const d2 = itemDate.getTime();
-            const diff = Math.ceil((d2 - d1) / 60000);
-            tableData1[i - 1].visits[vLength1 - 1].length = diff;
-            tableData1[i - 1].visits[vLength1 - 1].image2 = filesPath + item.filename;
+            tableData1[iData - 1].visits[iVisit - 1].cam2.push(filesPath + item.filename);
+            tableData1[iData - 1].visits[iVisit - 1].full = true;
           }
-          if (item.camId === 'cam1_1') {
-            tableData1[i - 1].visits.push({
-              time: curTime,
-              length: 0,
-              image1: filesPath + item.filename,
-              image2: ''
-            });
-          }
+          tableData1[iData - 1].visits[iVisit - 1].end = itemDate;
+          
+          const dStart = tableData1[iData - 1].visits[iVisit - 1].start.getTime();
+          const dEnd = tableData1[iData - 1].visits[iVisit - 1].end.getTime();
+          const length = Math.ceil((dEnd - dStart) / 60000);
+          tableData1[iData - 1].visits[iVisit - 1].length = length;
         } else {
-          if (item.camId === 'cam1_1') {
-            tableData1.push({date: curDate,
-              visits:[{
-                time:
-                curTime,
-                length: 0,
-                image1: filesPath + item.filename,
-                image2: ''
-              }]
-            });
-            i = i + 1;
-          }
+          tableData1[iData - 1].visits.push({
+            start: itemDate,
+            end: itemDate,
+            time: curTime,
+            length: 0,
+            full: false,
+            cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
+          });
+          
+          iVisit = iVisit + 1;
         }
-        
-        prevDate = curDate;
-        prevItem = item;
-      });
-      // console.log('tableData1', tableData1)
-      
-      
-      const d2 = data?.filter((el) => (el.camId==='cam2_1' || el.camId==='cam2_2'));
-      // console.log(d2)
-      curDate = '';
-      prevDate = '';
-      i = 0;
-      let prevItem2: IFiles;
-      d2?.forEach((item, idx) => {
-        if (prevItem2 === undefined) prevItem2 = item;
-        
-        const itemDate = new Date(item.dateTime.slice(0, -1));
-        const prevItemDate = new Date(prevItem2.dateTime.slice(0, -1));
-        curDate =  itemDate.toLocaleDateString();
-        const curTime =  itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        if(curDate === prevDate) {
+
+      } else {
+        iVisit = 0;
+        tableData1.push({
+          date: curDate,
+          visits: [{
+            start: itemDate,
+            end: itemDate,
+            time: curTime,
+            length: 0,
+            full: false,
+            cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
+          }]
+        });
+        iData = iData + 1;
+        iVisit = iVisit + 1;
+      }
+
+      prevDate = curDate;
+      prevItem = item;
+    });
+    console.log('tableData1', tableData1)
+
+
+    const d2 = data?.filter((el) => (el.camId === 'cam2_1' || el.camId === 'cam2_2'));
+    d2?.sort((a, b) => (a.dateTime > b.dateTime) ? 1 : -1);
+    // console.log(d1)
+    curDate = '';
+    prevDate = '';
+    iData = 0;
+    iVisit = 0;
+    prevItem = {} as IFiles;
+    d2?.forEach((item, idx) => {
+      if (idx === 0) prevItem = item;
+
+      const itemDate = new Date(item.dateTime.slice(0, -1));
+      const prevItemDate = new Date(prevItem.dateTime.slice(0, -1));
+
+      const d1 = prevItemDate.getTime();
+      const d2 = itemDate.getTime();
+      const diff = Math.ceil((d2 - d1) / 60000);
+
+      curDate = itemDate.toLocaleDateString();
+      const curTime = itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      if (curDate === prevDate) {
+        if (diff < minTimeDiff) {
+          if (item.camId === 'cam2_1') {
+            tableData2[iData - 1].visits[iVisit - 1].cam1.push(filesPath + item.filename);
+            
+          }
+          
           if (item.camId === 'cam2_2') {
-            const vLength1 = tableData2[i-1].visits.length;
-            const d1 = prevItemDate.getTime();
-            const d2 = itemDate.getTime();
-            const diff = Math.ceil((d2 - d1) / 60000);
-            tableData2[i - 1].visits[vLength1 - 1].length = diff;
-            tableData2[i - 1].visits[vLength1 - 1].image2 = filesPath + item.filename;
+            tableData2[iData - 1].visits[iVisit - 1].cam2.push(filesPath + item.filename);
+            tableData2[iData - 1].visits[iVisit - 1].full = true;
           }
-          if (item.camId === 'cam2_1') {
-            tableData2[i - 1].visits.push({
-              time: curTime,
-              length: 0,
-              image1: filesPath + item.filename,
-              image2: ''
-            });
-          }
+          tableData2[iData - 1].visits[iVisit - 1].end = itemDate;
+          
+          const dStart = tableData2[iData - 1].visits[iVisit - 1].start.getTime();
+          const dEnd = tableData2[iData - 1].visits[iVisit - 1].end.getTime();
+          const length = Math.ceil((dEnd - dStart) / 60000);
+          tableData2[iData - 1].visits[iVisit - 1].length = length;
         } else {
-          if (item.camId === 'cam2_1') {
-            tableData2.push({date: curDate,
-              visits:[{
-                time:
-                curTime,
-                length: 0,
-                image1: filesPath + item.filename,
-                image2: ''
-              }]
-            });
-            i = i + 1;
-          }
+          tableData2[iData - 1].visits.push({
+            start: itemDate,
+            end: itemDate,
+            time: curTime,
+            length: 0,
+            full: false,
+            cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
+          });
+          
+          iVisit = iVisit + 1;
         }
-        
-        prevDate = curDate;
-        prevItem2 = item;
-      });
-      // console.log('tableData2', tableData2)
-      
+
+      } else {
+        iVisit = 0;
+        tableData2.push({
+          date: curDate,
+          visits: [{
+            start: itemDate,
+            end: itemDate,
+            time: curTime,
+            length: 0,
+            full: false,
+            cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
+          }]
+        });
+        iData = iData + 1;
+        iVisit = iVisit + 1;
+      }
+
+      prevDate = curDate;
+      prevItem = item;
+    });
+    console.log('tableData2', tableData2)
+
   }
 
 
@@ -295,10 +263,10 @@ const Dashboard: FC = () => {
 
                   <Row gutter={[16, 16]} className='mt-10'>
                     <Col>
-                      <div className='text-xl mb-5 text'>Цех 1</div>
+                      {/* <div className='text-xl mb-5 text'>Цех 1</div>
                       <Table2 tableData={tableData1} />
                       <div className='text-xl mb-5 text'>Цех 2</div>
-                      <Table2 tableData={tableData2} />
+                      <Table2 tableData={tableData2} /> */}
                     </Col>
                   </Row>
 
