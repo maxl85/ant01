@@ -1,6 +1,5 @@
 import React from 'react';
-import { Table, Image, Progress, Badge, Dropdown, Button, TableColumnsType } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Table, Button, TableColumnsType } from 'antd';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import FillCell from './FillCell/FillCell';
@@ -57,9 +56,6 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
   const [openViewer, setOpenViewer] = React.useState(false);
   const [images, setImages] = React.useState<string[]>([]);
 
-  // console.log(images)
-
-
   const expandedRowRender = (visits: IVisits[]) => {
     const columns: TableColumnsType<ExpandedDataType> = [
       {
@@ -71,7 +67,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
       },
       {
         title: 'Обход', key: 'full', width: 50, render: (_, { full, length }) => (
-          <div className='text-center'>
+          <div className=''>
             {full ?
               <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
               length > 0 ?
@@ -150,7 +146,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
     { title: 'Дата', dataIndex: 'date', width: 100, key: 'date' },
     {
       title: 'Обход 1', key: 'full1', width: 70, render: (_, { full1, lengthVisit1 }) => (
-        <div className='text-center'>
+        <div className=''>
           {full1 ?
             <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
             lengthVisit1 > 0 ?
@@ -209,7 +205,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
     },
     {
       title: 'Обход 2', key: 'full2', width: 70, render: (_, { full2, lengthVisit2 }) => (
-        <div className='text-center'>
+        <div className=''>
           {full2 ?
             <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
             lengthVisit2 > 0 ?
