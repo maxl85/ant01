@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+servers:
+- url: https://d5dtnlbjpk4c8on6brdr.apigw.yandexcloud.net
+paths:
+  /:
+    get:
+      x-yc-apigateway-integration:
+        type: http
+        url: http://158.160.2.88:7777/api
+        method: GET
