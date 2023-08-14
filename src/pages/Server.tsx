@@ -64,12 +64,12 @@ const Server: FC = () => {
         <Sider />
         <Layout>
           <Header />
-          <Layout className='px-6'>
+          <Layout className='px-0 sm:px-6'>
             <Row>
               <Col xs={24} lg={{ span: 22, offset: 1 }} xl={{ span: 20, offset: 2 }}>
 
-                <Layout.Content className='p-6 my-4'>
-                  <Row gutter={[16, 16]} className='mt-10'>
+                <Layout.Content className='p-3 sm:p-6 my-0'>
+                  <Row gutter={[16, 16]} className='mt-5'>
                     <Col>
                       {data && <Table tableData={data} />}
                     </Col>
