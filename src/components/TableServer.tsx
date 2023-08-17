@@ -25,6 +25,8 @@ const columns: ColumnsType<IFiles> = [
     dataIndex: 'id',
     width: 50,
     key: 'id',
+    // defaultSortOrder: 'descend',
+    sorter: (a, b) => a.id - b.id,
   },
   {
     title: 'camId',
@@ -36,12 +38,15 @@ const columns: ColumnsType<IFiles> = [
   //   title: 'fileName',
   //   dataIndex: 'filename',
   //   key: 'filename',
+  //   width: 80,
   // },
   {
     title: 'dateTime',
     dataIndex: 'dateTime',
     width: 190,
     key: 'dateTime',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => (a.dateTime > b.dateTime) ? 1 : -1,
   },
   {
     title: 'createdAt',

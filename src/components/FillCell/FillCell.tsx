@@ -9,11 +9,14 @@ const FillCell: FC<FillCellProps> = ({ value }) => {
   const percentage = value * 10;
   let threeColor;
   if (value < 5) {
-    threeColor = styles.red;
+    // threeColor = styles.red;
+    threeColor = styles.gray;
   } else if ( value >= 5 && value < 10) {
-    threeColor = styles.yellow;
+    // threeColor = styles.yellow;
+    threeColor = styles.gray;
   } else {
-    threeColor = styles.green;
+    // threeColor = styles.green;
+    threeColor = styles.gray;
   }
   
   return (

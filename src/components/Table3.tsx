@@ -66,7 +66,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
         )
       },
       {
-        title: 'Обход', key: 'full', width: 50, render: (_, { full, length }) => (
+        title: 'Обход', key: 'full', width: 55, render: (_, { full, length }) => (
           <div className=''>
             {full ?
               <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
@@ -90,7 +90,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             {cam1.length > 0 ?
               <Button
                 className='mr-1'
-                type="text"
+                // type="text"
+                type="link"
                 size="small"
                 onClick={() => { setOpenViewer(true); setImages(cam1); }}>
                 Cam1
@@ -98,7 +99,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
               :
               <Button
                 disabled
-                type="text"
+                // type="text"
+                type="link"
                 size="small"
                 onClick={() => { setOpenViewer(true); setImages(cam1); }}>
                 Cam1
@@ -107,7 +109,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             {cam2.length > 0 ?
               <Button
                 className='mr-1'
-                type="text"
+                // type="text"
+                type="link"
                 size="small"
                 onClick={() => { setOpenViewer(true); setImages(cam2); }}>
                 Cam2
@@ -115,7 +118,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
               :
               <Button
                 disabled
-                type="text"
+                // type="text"
+                type="link"
                 size="small"
                 onClick={() => { setOpenViewer(true); setImages(cam2); }}>
                 Cam2
@@ -143,9 +147,16 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
 
 
   const columns: TableColumnsType<DataType> = [
-    { title: 'Дата', dataIndex: 'date', width: 100, key: 'date' },
     {
-      title: 'Обход 1', key: 'full1', width: 70, render: (_, { full1, lengthVisit1 }) => (
+      title: 'Дата',
+      dataIndex:
+      'date', width: 100,
+      key: 'date',
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => (a.date > b.date) ? 1 : -1,
+    },
+    {
+      title: 'Обход 1', key: 'full1', width: 75, render: (_, { full1, lengthVisit1 }) => (
         <div className=''>
           {full1 ?
             <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
@@ -169,7 +180,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
           {cam1Visit1.length > 0 ?
             <Button
               className='mr-1'
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam1Visit1); }}>
               Cam1
@@ -177,7 +189,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             :
             <Button
               disabled
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam1Visit1); }}>
               Cam1
@@ -186,7 +199,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
           {cam2Visit1.length > 0 ?
             <Button
               className='mr-1'
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam2Visit1); }}>
               Cam2
@@ -194,7 +208,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             :
             <Button
               disabled
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam2Visit1); }}>
               Cam2
@@ -204,7 +219,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
       )
     },
     {
-      title: 'Обход 2', key: 'full2', width: 70, render: (_, { full2, lengthVisit2 }) => (
+      title: 'Обход 2', key: 'full2', width: 75, render: (_, { full2, lengthVisit2 }) => (
         <div className=''>
           {full2 ?
             <CheckCircleTwoTone className='text-lg' twoToneColor="#52c41a" /> :
@@ -228,7 +243,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
           {cam1Visit2.length > 0 ?
             <Button
               className='mr-1'
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam1Visit2); }}>
               Cam1
@@ -236,7 +252,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             :
             <Button
               disabled
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam1Visit2); }}>
               Cam1
@@ -245,7 +262,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
           {cam2Visit2.length > 0 ?
             <Button
               className='mr-1'
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam2Visit2); }}>
               Cam2
@@ -253,7 +271,8 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
             :
             <Button
               disabled
-              type="text"
+              // type="text"
+              type="link"
               size="small"
               onClick={() => { setOpenViewer(true); setImages(cam2Visit2); }}>
               Cam2
@@ -309,7 +328,7 @@ const _Table3 = ({ tableData }: { tableData: IData[] }) => {
         }}
         dataSource={data}
         size="small"
-        scroll={{ x: 775, y: 470 }}
+        scroll={{ x: 775, y: 330 }}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,

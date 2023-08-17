@@ -17,6 +17,7 @@ import AreaPlot from '../components/AreaPlot';
 import AreaPlotValue from '../components/AreaPlotValue';
 import BarPlot from '../components/BarPlot';
 import BulletPlot from '../components/BulletPlot';
+import ServerOnlineChart from '../components/ServerOnlineChart';
 
 
 
@@ -71,6 +72,7 @@ const Server: FC = () => {
                 <Layout.Content className='p-3 sm:p-6 my-0'>
                   <Row gutter={[16, 16]} className='mt-5'>
                     <Col>
+                      <ServerOnlineChart />
                       {data && <Table tableData={data} />}
                     </Col>
                   </Row>

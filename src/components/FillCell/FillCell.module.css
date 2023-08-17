@@ -12,3 +12,8 @@
   border: 1px solid rgba(244, 67, 54, 0.64);
   background: linear-gradient(90deg, rgba(244, 67, 54, 0.50) 0%, rgba(244, 67, 54, 0.20) 100%);
 }
+
+.gray {
+  border: 1px solid rgba(165, 165, 165, 0.64);
+  background: linear-gradient(90deg, rgba(187, 187, 187, 0.5) 0%, rgba(211, 211, 211, 0.2) 100%);
+}
