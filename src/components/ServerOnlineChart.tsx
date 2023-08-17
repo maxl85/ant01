@@ -10,6 +10,7 @@ interface IdataTable {
   time: string;
   key: string;
   value: number;
+  hhmm: string;
 }
 
 export default function ServerOnlineChart() {
@@ -23,78 +24,74 @@ export default function ServerOnlineChart() {
     // console.log(d1)
     
     let dt: IdataTable = {} as IdataTable;
-    let curDate = '';
-    let prevDate = '';
     let prevItem: IOnline = {} as IOnline;
     dataSort?.forEach((item, idx) => {
       if (idx === 0) prevItem = item;
       
-      const itemDate = new Date(item.createdAt.slice(0, -1));
-      const prevItemDate = new Date(prevItem.createdAt.slice(0, -1));
-      // const itemDate = new Date(item.createdAt);
-      // const prevItemDate = new Date(prevItem.createdAt);
+      // const itemDate = new Date(item.createdAt.slice(0, -1));
+      // const prevItemDate = new Date(prevItem.createdAt.slice(0, -1));
+      const itemDate = new Date(item.createdAt);
+      const prevItemDate = new Date(prevItem.createdAt);
       
       const d1 = prevItemDate.getTime();
       const d2 = itemDate.getTime();
-      const diff = Math.floor((d2 - d1) / 60000);
+      const diffMinutes = Math.floor((d2 - d1) / 60000);
       // console.log(diff);
+      
+      const diffCounter = item.counter - prevItem.counter;
+      // console.log(diffCounter)
       
       if (idx > 0) {
         dt = {
           key: 'Связь',
           time: itemDate.toString(),
-          value: diff > 2 ? 0 : 1,
+          value: diffMinutes > 2 ? 0 : 1,
+          hhmm: itemDate.toLocaleDateString() + '  ' + itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        dataTable.push(dt);
+        
+        dt = {
+          key: 'Питание',
+          time: itemDate.toString(),
+          value: diffCounter === 1 ? 3 : diffCounter < 0 ? 2 : 3,
+          hhmm: itemDate.toLocaleDateString() + '  ' + itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
         dataTable.push(dt);
       }
       
-      console.log(dt)
+      // console.log(dt)
       
       prevItem = item;
     });
+    
+    const last = new Date(dataTable[dataTable.length - 1].time);
+    const cur = new Date();
+    
+    // console.log(last)
+    // console.log(cur)
+    
+    
+    
+    if ((cur.getTime() - last.getTime())/1000/60 > 2) {
+      dataTable.push({
+        key: 'Связь',
+        time: cur.toString(),
+        value: 0,
+        hhmm: cur.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      });
+      
+      dataTable.push({
+        key: 'Питание',
+        time: cur.toString(),
+        value: 2,
+        hhmm: cur.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      });
+    }
+    
   }
-  
-  
-  
-  
-
-
-  // const dataTable = [
-  //   {
-  //     time: '2023-08-17 06:34:43',
-  //     key: 'Питание',
-  //     value: 125,
-  //   },
-  //   {
-  //     time: '2023-08-17 06:35:43',
-  //     key: 'Питание',
-  //     value: 50,
-  //   },
-  //   {
-  //     time: '2023-08-17 06:46:43',
-  //     key: 'Питание',
-  //     value: 100,
-  //   },
-  //   {
-  //     time: '2023-08-17 06:47:43',
-  //     key: 'Питание',
-  //     value: 50,
-  //   },
-  //   {
-  //     time: '2023-08-17 06:48:43',
-  //     key: 'Питание',
-  //     value: 100,
-  //   },
-  //   {
-  //     time: '2023-08-17 06:49:43',
-  //     key: 'Питание',
-  //     value: 50,
-  //   },
-  // ];
 
   const config: LineConfig = {
     autoFit: true,
-    // height: 100,
     data: dataTable,
     xField: 'time',
     xAxis: {
@@ -103,22 +100,22 @@ export default function ServerOnlineChart() {
       label: {formatter(text, item, index) {
         let d: Date = new Date();
         if (item.id) d = new Date(+item.id);
-        // console.log(d.getHours(), ':', d.getMinutes())
-        // console.log(d.toLocaleTimeString())
         return d.toLocaleDateString()+' '+d.getHours()+':'+d.getMinutes();
       },}
-      // tickInterval: 0.1
     },
-    // meta: {
-    //   time: {
-    //     type: 'time'
-    //   }
-    // },
     yField: 'value',
     // legend: false,
     seriesField: 'key',
     stepType: 'vh',
-    tooltip: {},
+    tooltip: {
+      title: 'hhmm',
+      formatter: (datum) => {
+        return {
+          name: datum.key,
+          value: datum.value,
+        };
+      }
+    },
     slider: {
       start: 0,
       end: 1,
@@ -131,21 +128,5 @@ export default function ServerOnlineChart() {
     <Card bordered={false} className='mb-5' bodyStyle={{ padding: '20px 20px 5px 20px' }}>
       <Line className='h-[300px]' {...config} />
     </Card>
-    
-    // <Plot
-    //     data={[
-    //       {
-    //         x: ['2013-10-04 22:23', '2013-10-04 22:24', '2013-10-04 22:25'],
-    //         y: [2, 6, 3],
-    //         type: 'scatter',
-    //         mode: 'lines',
-    //         marker: {color: 'red'},
-    //         line: {shape: 'hv'}
-    //       },
-    //       // {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-    //     ]}
-    //     layout={{width: 500, height: 400,  title: 'A Fancy Plot'}}
-    //   />
-
   );
 }

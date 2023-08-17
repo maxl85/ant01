@@ -21,7 +21,7 @@ export const onlineApi = createApi({
   }),
   endpoints: (builder) => ({
     getOnline: builder.query<IOnline[], void>({
-      query: () => 'online?rpiId=rpi01&last=500',
+      query: () => 'online?rpiId=rpi01&last=1440',
     }),
   }),
 });
