@@ -26,11 +26,15 @@ export interface IFiles {
   createdAt: string;
 }
 
+export interface IDates {
+  dateTime: string;
+}
+
 // export type CostResponse = ICost[];
 
 
 export const filesApi = createApi({
-  reducerPath: 'costApi',
+  reducerPath: 'filesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SERVER_URL,
     prepareHeaders: (headers) => {
@@ -42,10 +46,20 @@ export const filesApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllCosts: builder.query<IFiles[], void>({
+    getAllFiles: builder.query<IFiles[], void>({
       query: () => 'files',
+    }),
+    getAllDates: builder.query<IDates[], { cam1: string; cam2: string }>({
+      // query: (arg) => `files/dates?cam1=${arg.cam1}&cam2=${arg.cam2}`,
+      query: (arg) => ({
+        url: 'files/dates',
+        params: {
+          cam1: arg.cam1,
+          cam2: arg.cam2,
+        }
+      })
     }),
   }),
 });
 
-export const { useGetAllCostsQuery } = filesApi;
+export const { useGetAllFilesQuery, useGetAllDatesQuery } = filesApi;

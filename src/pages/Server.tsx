@@ -4,7 +4,7 @@ import { notification, Layout, Row, Col, Image, Card, Statistic, Spin } from 'an
 // import { useNavigate } from 'react-router-dom';
 
 
-import { useGetAllCostsQuery } from '../redux/files/filesApi';
+import { useGetAllFilesQuery } from '../redux/files/filesApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
 import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
@@ -32,7 +32,7 @@ interface IData {
 
 const Server: FC = () => {
   // const navigate = useNavigate();
-  const { data, error, isError, isLoading } = useGetAllCostsQuery();
+  const { data, error, isError, isLoading } = useGetAllFilesQuery();
   // console.log(data)
 
   const [msg, contextHolder] = notification.useNotification();

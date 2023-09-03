@@ -28,7 +28,7 @@ export default function ImageViewer(
         open={open}
         close={() => setOpen(false)}
         slides={slides}
-        controller={{closeOnBackdropClick: false}}
+        controller={{closeOnBackdropClick: true}}
         carousel={{finite: true}}
         plugins={[Counter, Thumbnails, Zoom]}
         thumbnails={{ showToggle: true }}

@@ -72,7 +72,7 @@ export default function ServerOnlineChart() {
     
     
     
-    if ((cur.getTime() - last.getTime())/1000/60 > 2) {
+    if ((cur.getTime() - last.getTime())/1000/60 > 4) {
       dataTable.push({
         key: 'Связь',
         time: cur.toString(),

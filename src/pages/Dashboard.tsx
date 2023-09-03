@@ -4,14 +4,15 @@ import { notification, Layout, Row, Col, Image, Card, Statistic, Spin } from 'an
 // import { useNavigate } from 'react-router-dom';
 
 
-import { IFiles, useGetAllCostsQuery } from '../redux/files/filesApi';
+import { IFiles, useGetAllFilesQuery, useGetAllDatesQuery } from '../redux/files/filesApi';
 import { isApiErrorResponse, isErrorWithMessage } from '../redux/helpers';
 import { removeUser } from '../utils/auth';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import Sider from '../layout/Sider';
 // import Table2 from '../components/Table2';
-import Table3 from '../components/Table3';
+import Table from '../components/Table';
+import Table1 from '../components/Table1';
 // import WeekBox from '../components/WeekBox';
 // import Calendar from '../components/Calendar';
 import AreaPlot from '../components/AreaPlot';
@@ -37,11 +38,11 @@ interface IData {
 
 const Dashboard: FC = () => {
   // const navigate = useNavigate();
-  const { data, error, isError, isLoading } = useGetAllCostsQuery();
-
+  const { data, error, isError, isLoading } = useGetAllFilesQuery();
+    
   const [msg, contextHolder] = notification.useNotification();
 
-
+/*
   const tableData1: IData[] = [];
   const tableData2: IData[] = [];
 
@@ -71,7 +72,7 @@ const Dashboard: FC = () => {
       const d2 = itemDate.getTime();
       const diff = Math.ceil((d2 - d1) / 60000);
 
-      curDate = itemDate.toLocaleDateString();
+      curDate = itemDate.toLocaleDateString('fr-CA');
       const curTime = itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       if (curDate === prevDate) {
@@ -146,7 +147,7 @@ const Dashboard: FC = () => {
       const d2 = itemDate.getTime();
       const diff = Math.ceil((d2 - d1) / 60000);
 
-      curDate = itemDate.toLocaleDateString();
+      curDate = itemDate.toLocaleDateString('fr-CA');
       const curTime = itemDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       if (curDate === prevDate) {
@@ -203,19 +204,20 @@ const Dashboard: FC = () => {
     // console.log('tableData2', tableData2)
 
   }
+*/
 
 
 
-  useEffect(() => {
-    if (isApiErrorResponse(error)) {
-      if (error.status === 401) {
-        removeUser();
-        // navigate('/login');
-      } else {
-        msg.error({ message: `Ошибка ${error.status} (${error.data.error})`, description: error.data.message });
-      }
-    }
-  }, [error, msg]);
+  // useEffect(() => {
+  //   if (isApiErrorResponse(error)) {
+  //     if (error.status === 401) {
+  //       removeUser();
+  //       // navigate('/login');
+  //     } else {
+  //       msg.error({ message: `Ошибка ${error.status} (${error.data.error})`, description: error.data.message });
+  //     }
+  //   }
+  // }, [error, msg]);
 
 
   // if (isLoading) return <h1 className='text-center mt-5'>Загрузка...</h1>;
@@ -261,12 +263,15 @@ const Dashboard: FC = () => {
                   </Row>
 
                   <Row gutter={[16, 16]} className='mt-10'>
-                    <Col>
+                    {/* <Col>
                       <div className='text-xl mb-5 text'>Проход 1</div>
-                      <Table3 tableData={tableData1} />
+                      <Table tableData={tableData1} />
                       <div className='text-xl mb-5 text'>Проход 2</div>
-                      <Table3 tableData={tableData2} />
-                    </Col>
+                      <Table tableData={tableData2} />
+                    </Col> */}
+                    
+                    <div className='text-xl mb-5 text'>Проход 1</div>
+                    <Table1 />
                   </Row>
 
                 </Layout.Content>
