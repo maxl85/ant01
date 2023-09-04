@@ -74,7 +74,7 @@ const PAGE_SIZE = 7;
 
 
 
-const _Table1 = () => {
+const _Table2 = () => {
   // Время между проходками. Вынести в настройки на сайте??????
   const minTimeDiff = 30;
   const filesPath = process.env.REACT_APP_SERVER_URL + '/files/';
@@ -95,7 +95,6 @@ const _Table1 = () => {
     },
   });
 
-
   React.useEffect(() => {
     const token = JSON.parse(localStorage.getItem('auth') || '{}')?.token ?? '';
 
@@ -104,7 +103,7 @@ const _Table1 = () => {
       headers: { 'Authorization': `Bearer ${token}` },
     };
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/files/dates?cam1=cam1_1&cam2=cam1_2`, requestOptions)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/files/dates?cam1=cam2_1&cam2=cam2_2`, requestOptions)
       .then(response => response.json())
       .then(data => {
         const dates = data as IDates[];
@@ -144,7 +143,7 @@ const _Table1 = () => {
         if (end > allDates.length) end = allDates.length - 1;
       }
 
-      fetch(`${process.env.REACT_APP_SERVER_URL}/files/between?cam1=cam1_1&cam2=cam1_2&date1=${allDates[end]}&date2=${allDates[start]}`, requestOptions)
+      fetch(`${process.env.REACT_APP_SERVER_URL}/files/between?cam1=cam2_1&cam2=cam2_2&date1=${allDates[end]}&date2=${allDates[start]}`, requestOptions)
         .then(response => response.json())
         .then(data => {
           setDataDB(data);
@@ -180,11 +179,11 @@ const _Table1 = () => {
 
       if (curDate === prevDate) {
         if (diff < minTimeDiff) {
-          if (item.camId === 'cam1_1') {
+          if (item.camId === 'cam2_1') {
             tableData[iData - 1].visits[iVisit - 1].cam1.push(filesPath + item.filename);
           }
           
-          if (item.camId === 'cam1_2') {
+          if (item.camId === 'cam2_2') {
             tableData[iData - 1].visits[iVisit - 1].cam2.push(filesPath + item.filename);
             tableData[iData - 1].visits[iVisit - 1].full = true;
           }
@@ -200,9 +199,9 @@ const _Table1 = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: item.camId === 'cam1_2',
-            cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
-            cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
+            full: item.camId === 'cam2_2',
+            cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
           });
           
           iVisit = iVisit + 1;
@@ -217,9 +216,9 @@ const _Table1 = () => {
             end: itemDate,
             time: curTime,
             length: 0,
-            full: item.camId === 'cam1_2',
-            cam1: item.camId === 'cam1_1' ? [filesPath + item.filename] : [],
-            cam2: item.camId === 'cam1_2' ? [filesPath + item.filename] : [],
+            full: item.camId === 'cam2_2',
+            cam1: item.camId === 'cam2_1' ? [filesPath + item.filename] : [],
+            cam2: item.camId === 'cam2_2' ? [filesPath + item.filename] : [],
           }]
         });
         iData = iData + 1;
@@ -528,4 +527,4 @@ const _Table1 = () => {
   );
 };
 
-export default _Table1;
+export default _Table2;
